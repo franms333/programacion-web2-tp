@@ -49,4 +49,7 @@ git commit -m "Comentario"
 // "Envia los archivos/cambios al repo"
 git push
 
+// "Descargar las actualizaciones del proyecto"
+git pull
+
 -->
