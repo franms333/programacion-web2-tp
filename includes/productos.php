@@ -28,9 +28,9 @@ $productos = [
                 <!--Nav Button  -->
                 <nav>                                                      
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link <?php if($_GET['categoria'] == 1) echo "active"; ?>"  href="shop.php?categoria=1">Malla de Cuero</a>
-                        <a class="nav-item nav-link <?php if($_GET['categoria'] == 2) echo "active"; ?>"  href="shop.php?categoria=2"> Malla de Metal</a>
-                        <a class="nav-item nav-link <?php if($_GET['categoria'] == 3) echo "active"; ?>" href="shop.php?categoria=3"> Malla de Goma </a>
+                        <a class="nav-item nav-link <?php if(!empty($_GET['categoria']) && $_GET['categoria'] == 1) echo "active"; ?>"  href="shop.php?categoria=1">Malla de Cuero</a>
+                        <a class="nav-item nav-link <?php if(!empty($_GET['categoria']) && $_GET['categoria'] == 2) echo "active"; ?>"  href="shop.php?categoria=2"> Malla de Metal</a>
+                        <a class="nav-item nav-link <?php if(!empty($_GET['categoria']) && $_GET['categoria'] == 3) echo "active"; ?>" href="shop.php?categoria=3"> Malla de Goma </a>
                     </div>
                 </nav>
                 <!--End Nav Button  -->
