@@ -44,7 +44,7 @@
         </div>
         <!-- Hero Area End-->
         <!--================login_part Area =================-->
-        <section class="login_part section_padding ">
+        <section id="login" class="login_part section_padding  ">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
@@ -72,15 +72,26 @@
                                             placeholder="Contraseña">
                                     </div>
                                     <div class="col-md-12 form-group">
+                                        
+
                                         <div class="creat_account d-flex align-items-center">
                                             <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">Recuerdame la contraseña</label>
                                         </div>
+
+                                        <?php if(isset($_GET['error']) ): ?>
+
+                                        <div class="alert alert-danger" style="margin-top: 15px;">
+                                            USUARIO O CONTRASEÑA INCORRECTOS
+                                        </div>
+
+                                        <?php endif; ?>
                                         <button type="submit" value="submit" class="btn_3">
                                             log in
                                        </button>
                                         <a class="lost_pass" href="#">Te olvidate la contraseña verdad?</a>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

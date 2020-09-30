@@ -8,7 +8,7 @@
         header("Location: admin/index.php");
     }else{
         /* echo "Error usuario o contraseña no valida"; */
-        header("Location: index.php");
+        header("Location: login.php?error=true#login");
     }
 
 }else{
