@@ -1,5 +1,5 @@
-
-<?php $new_arrivals = [
+<?php 
+$new_arrivals = [
     1 => ['nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'new_product1.png'],
     2 => ['nombre' => 'Thermo Ball Etip Gloves', 'precio' => '60000000', 'imagen' => 'new_product2.png'],
     3 => ['nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'new_product3.png']
