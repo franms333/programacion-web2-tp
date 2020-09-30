@@ -62,7 +62,7 @@
                             <div class="login_part_form_iner">
                                 <h3>Bienvenido Usuario! <br>
                                     Porfavor logueate</h3>
-                                <form class="row contact_form" action="admin" method="post" novalidate="novalidate">
+                                <form class="row contact_form" action="procesar.php" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="name" name="name" value=""
                                             placeholder="Usuario">
