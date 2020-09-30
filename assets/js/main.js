@@ -444,10 +444,10 @@
             seconds = "0" + seconds;
           }
 
-          $("#days").html("<span>Days</span>" + days);
-          $("#hours").html("<span>Hours</span>" + hours);
-          $("#minutes").html("<span>Minutes</span>" + minutes);
-          $("#seconds").html("<span>Seconds</span>" + seconds);
+          $("#days").php("<span>Days</span>" + days);
+          $("#hours").php("<span>Hours</span>" + hours);
+          $("#minutes").php("<span>Minutes</span>" + minutes);
+          $("#seconds").php("<span>Seconds</span>" + seconds);
 
         }
       // click counter js

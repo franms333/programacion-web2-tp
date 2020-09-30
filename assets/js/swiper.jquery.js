@@ -1140,7 +1140,7 @@
                     s.paginationContainer.find('.' + s.params.paginationProgressbarClass).transform('translate3d(0,0,0) scaleX(' + scaleX + ') scaleY(' + scaleY + ')').transition(s.params.speed);
                 }
                 if (s.params.paginationType === 'custom' && s.params.paginationCustomRender) {
-                    s.paginationContainer.html(s.params.paginationCustomRender(s, current + 1, total));
+                    s.paginationContainer.php(s.params.paginationCustomRender(s, current + 1, total));
                     s.emit('onPaginationRendered', s, s.paginationContainer[0]);
                 }
             }
@@ -1187,7 +1187,7 @@
                             paginationHTML += '<' + s.params.paginationElement+' class="' + s.params.bulletClass + '"></' + s.params.paginationElement + '>';
                         }
                     }
-                    s.paginationContainer.html(paginationHTML);
+                    s.paginationContainer.php(paginationHTML);
                     s.bullets = s.paginationContainer.find('.' + s.params.bulletClass);
                     if (s.params.paginationClickable && s.params.a11y && s.a11y) {
                         s.a11y.initPagination();
@@ -1203,7 +1203,7 @@
                             ' / ' +
                             '<span class="' + s.params.paginationTotalClass+'"></span>';
                     }
-                    s.paginationContainer.html(paginationHTML);
+                    s.paginationContainer.php(paginationHTML);
                 }
                 if (s.params.paginationType === 'progress') {
                     if (s.params.paginationProgressRender) {
@@ -1212,7 +1212,7 @@
                     else {
                         paginationHTML = '<span class="' + s.params.paginationProgressbarClass + '"></span>';
                     }
-                    s.paginationContainer.html(paginationHTML);
+                    s.paginationContainer.php(paginationHTML);
                 }
                 if (s.params.paginationType !== 'custom') {
                     s.emit('onPaginationRendered', s, s.paginationContainer[0]);
@@ -4292,8 +4292,8 @@
             notify: function (message) {
                 var notification = s.a11y.liveRegion;
                 if (notification.length === 0) return;
-                notification.html('');
-                notification.html(message);
+                notification.php('');
+                notification.php(message);
             },
             init: function () {
                 // Setup accessibility

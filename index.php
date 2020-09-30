@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
+    <title>Time Zones Relojes</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -24,15 +24,15 @@
 </head>
 
 <body>
-    <?php include('parciales/navbar.php'); ?>
+    <?php include('includes/navbar.php'); ?>
 
     <main>
-        <?php include('parciales/header.php') ?>
-        <?php include('parciales/destacados.php') ?>
-        <?php include('parciales/populares.php') ?>
+        <?php include('includes/header.php') ?>
+        <?php include('includes/new_arrivals.php') ?>
+        <?php include('includes/populares.php') ?>1
     </main>
  
-    <?php include('parciales/footer.php') ?>
+    <?php include('includes/footer.php') ?>
 </body>
 </html>
 
