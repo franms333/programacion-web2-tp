@@ -7,6 +7,10 @@ include "../helpers/functions.php";
 // Array asociativo del JSON de productos
 $productos = getDataFromJSON('productos');
 
+// // Array asociativo del JSON de categorias
+$categorias = getDataFromJSON('categorias');
+
+
 if(!empty($_GET['del'])){
     unset($productos[$_GET['del']]);
     setDataJSON('productos', $productos);
@@ -32,8 +36,9 @@ if(!empty($_GET['del'])){
                             <th>Descripcion</th>
                             <th>Precio</th>
                             <th>Stock</th>
+                            <th>Categoria</th>
                             <th>Imagen</th>
-                            <th style="width: 130px;">Modificar</th>
+                            <th style="width: 115px;">Modificar</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,8 +49,15 @@ if(!empty($_GET['del'])){
                             <td><?php echo $producto['descripcion'] ?></td>
                             <td><?php echo "$".number_format($producto['precio'], 2, ',', '.') ?></td>
                             <td><?php echo $producto['stock'] ?></td>
-                            <td>imagen</td>
-                            <td style="display: flex; justify-content: space-around; width: 130px;">
+                            <td><?php echo $categorias[$producto['id_categoria']]['nombre'] ?></td>
+                            <td style="padding:3px;">
+                                <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                                    <?php if(!empty($producto['imagen'])): ?>
+                                        <img src="../imagenes/<?php echo $producto['imagen'] ?>" width="70" ">
+                                    <?php endif; ?>
+                                </div>
+                            </td>
+                            <td style="display: flex; justify-content: space-around; width: 115px;">
                                 <a class="btn btn-info" href="producto_add.php?id=<?php echo $producto['id'] ?>"><i class="fas fa-edit"></i></a>
                                 <a class="btn btn-danger" href="productos.php?del=<?php echo $producto['id'] ?>"><i class="fas fa-trash-alt"></i></a>
                             </td>

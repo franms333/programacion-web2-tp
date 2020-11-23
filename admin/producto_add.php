@@ -5,19 +5,15 @@ include "../helpers/dataHelper.php";
 include "../helpers/functions.php";
 
 // Array asociativo del JSON de productos
-$data = getDataFromJSON('productos');
+$productos = getDataFromJSON('productos');
 
 // POST
 if(isset($_POST['add'])){
     if(!empty($_GET['id'])){
         // Id del producto
         $id = $_GET['id'];
-
-        // Array asociativo del JSON de productos
-        $data = getDataFromJSON('productos');
-
         // Informacion del producto
-        $producto = $data[$id];
+        $producto = $productos[$id];
     }
     else
     {
@@ -25,23 +21,44 @@ if(isset($_POST['add'])){
         $id = date('Ymdhis');
     }
 
-    $data[$id] = [
+    $archivo = $_FILES['archivo']['name'];
+
+    if(isset($archivo) && $archivo != ""){
+        $tipo = $_FILES["archivo"]['type'];
+
+        $tamano = $_FILES['archivo']['size'];
+
+        $temp = $_FILES['archivo']["tmp_name"];
+
+        if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000)))
+            echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/> - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
+        else
+            move_uploaded_file($temp, '../imagenes/'.$archivo);
+    }
+
+    $productos[$id] = [
         'id'=>$id,
         'nombre'=>$_POST['nombre'],
         'descripcion'=>$_POST['descripcion'],
         'precio'=>$_POST['precio'],
-        'stock'=>$_POST['stock']
+        'stock'=>$_POST['stock'],
+        'id_categoria'=>$_POST['categoria'],
+        'imagen'=>$archivo
     ];
 
-    setDataJSON('productos', $data);
+    setDataJSON('productos', $productos);
 
     redirect('productos.php');
 }
 
 if(!empty($_GET['id'])){
+    // Array asociativo del JSON de productos
+    $productos = getDataFromJSON('productos');
     // Informacion del producto del id enviado por GET
-    $producto = $data[$_GET['id']];
+    $producto = $productos[$_GET['id']];
 }
+
+$categorias = getDataFromJSON('categorias');
 
 ?>
     <div class="container-fluid">
@@ -56,7 +73,7 @@ if(!empty($_GET['id'])){
 
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
                         <input type="text" class="form-control" name="nombre" value="<?php echo !empty($producto['nombre']) ? $producto['nombre'] : ''?>">
@@ -64,7 +81,18 @@ if(!empty($_GET['id'])){
 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Descripcion</label>
-                        <textarea class="form-control" name="descripcion" value="<?php echo !empty($producto['descripcion'] ) ? $producto['descripcion'] : ''?>"></textarea>
+                        <textarea class="form-control" name="descripcion" ><?php echo !empty($producto['descripcion'] ) ? $producto['descripcion'] : '' ?></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+                        <select name="categoria" id="categoria" class="form-control">
+                            <?php foreach($categorias as $categoria): ?>
+                            <option value="<?php echo $categoria['id'] ?>" <?php echo $categoria['id'] == $producto['id_categoria'] ?  "selected" : ''; ?> >
+                                <?php echo $categoria['nombre']  ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -77,9 +105,18 @@ if(!empty($_GET['id'])){
                         <input type="text" class="form-control" name="stock" value="<?php echo !empty($producto['stock']) ? $producto['stock'] : ''?>">
                     </div>
 
-                    <div class="form-group" style="display: flex; flex-direction: column;">
-                        <label for="exampleInputEmail1">Subir Imagen</label>
-                        <input type="file">
+                    <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div  style="display: flex; flex-direction: column;">
+                            <label for="archivo">Subir Imagen</label>
+                            <input name="archivo" type="file">
+                        </div>
+
+                        <div>
+                            <?php if( !empty($producto['imagen']) ): ?>
+                                <img src="../imagenes/<?php echo $producto['imagen'] ?>" width="150">
+                            <?php endif; ?>
+                        </div>
+
                     </div>
 
                     <button type="submit" name="add" class="btn btn-primary">Enviar</button>
@@ -89,6 +126,4 @@ if(!empty($_GET['id'])){
 
     </div>
 
-<?php
-include 'includes/footer.php';
-?>
+<?php include 'includes/footer.php'; ?>

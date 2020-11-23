@@ -21,11 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="205f7d69-2251-452e-ac43-525427e9c9e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layout.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/producto_add.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/producto_add.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/productos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/productos.json" beforeDir="false" afterPath="$PROJECT_DIR$/db/productos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/categorias.json" beforeDir="false" afterPath="$PROJECT_DIR$/db/categorias.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/productos.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +44,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../subir imagenes php" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -69,7 +69,8 @@
       <updated>1605657495684</updated>
       <workItem from="1605657497122" duration="39000" />
       <workItem from="1605657566704" duration="5414000" />
-      <workItem from="1605730265799" duration="3490000" />
+      <workItem from="1605730265799" duration="4146000" />
+      <workItem from="1606085019642" duration="5783000" />
     </task>
     <servers />
   </component>
@@ -89,6 +90,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1020" y="362" key="FileChooserDialogImpl" timestamp="1606085167616">
+      <screen x="-1600" y="177" width="1600" height="860" />
+    </state>
+    <state x="-1020" y="362" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@-1600.177.1600.860" timestamp="1606085167616" />
     <state x="787" y="243" key="NewPhpClassDialog" timestamp="1605661616068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
