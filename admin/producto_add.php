@@ -88,7 +88,7 @@ $categorias = getDataFromJSON('categorias');
                         <label for="categoria">Categoria</label>
                         <select name="categoria" id="categoria" class="form-control">
                             <?php foreach($categorias as $categoria): ?>
-                            <option value="<?php echo $categoria['id'] ?>" <?php echo $categoria['id'] == $producto['id_categoria'] ?  "selected" : ''; ?> >
+                            <option value="<?php echo $categoria['id'] ?>" <?php echo !empty($producto['id_categoria']) ?  $categoria['id'] == $producto['id_categoria'] ?  "selected" : '' : '' ?> >
                                 <?php echo $categoria['nombre']  ?>
                             </option>
                             <?php endforeach; ?>
