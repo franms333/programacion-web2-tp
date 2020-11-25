@@ -14,7 +14,7 @@ $categorias = getDataFromJSON('categorias');
 if(!empty($_GET['del'])){
     unset($productos[$_GET['del']]);
     setDataJSON('productos', $productos);
-    redirect('productos.php');
+    //redirect('productos.php');
 }
 
 ?>
