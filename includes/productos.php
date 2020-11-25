@@ -55,6 +55,7 @@ $marcas = getDataFromJSON('marcas');
             <!-- card one -->
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
+
                     <?php foreach($productos as $producto): ?>
 
                         <?php if(
@@ -63,10 +64,10 @@ $marcas = getDataFromJSON('marcas');
                             ):
                         ?>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -76,17 +77,17 @@ $marcas = getDataFromJSON('marcas');
                                     </div>
                                     <div class="popular-caption">
                                         <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo $producto['precio'] ?></span>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
 
-                        <?php elseif( isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria']): ?>
+                        <?php elseif( (isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria']) && !isset($_GET['marca'])    ): ?>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -96,17 +97,17 @@ $marcas = getDataFromJSON('marcas');
                                     </div>
                                     <div class="popular-caption">
                                         <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo $producto['precio'] ?></span>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
 
-                        <?php elseif( isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca']): ?>
+                        <?php elseif( (isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca']) && !isset($_GET['categoria'])   ): ?>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -116,17 +117,17 @@ $marcas = getDataFromJSON('marcas');
                                     </div>
                                     <div class="popular-caption">
                                         <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo $producto['precio'] ?></span>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
 
                         <?php elseif( !isset($_GET['marca']) && !isset($_GET['categoria'])): ?>
 
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -136,7 +137,7 @@ $marcas = getDataFromJSON('marcas');
                                     </div>
                                     <div class="popular-caption">
                                         <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo $producto['precio'] ?></span>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>

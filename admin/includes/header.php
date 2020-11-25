@@ -71,7 +71,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="marcas.php">
-                <i class="fas fa-fw fa-send"></i>
+                <i class="fas fa-fw fa-file"></i>
                 <span>Marcas</span></a>
         </li>
 

@@ -44,7 +44,7 @@ if(isset($_POST['add'])){
         'stock'=>$_POST['stock'],
         'id_categoria'=>$_POST['categoria'],
         'id_marca'=>$_POST['marca'],
-        'imagen'=>$archivo
+        'imagen'=> !empty($archivo) ? $archivo : $productos[$id]['imagen']
     ];
 
     setDataJSON('productos', $productos);
