@@ -13,7 +13,7 @@ if(isset($_POST['add'])){
         // Id del marca
         $id = $_GET['id'];
         // Informacion del marca
-        $marca = $categorias[$id];
+        $marca = $marcas[$id];
     }
     else
     {
@@ -21,7 +21,7 @@ if(isset($_POST['add'])){
         $id = date('Ymdhis');
     }
 
-    $categorias[$id] = [
+    $marcas[$id] = [
         'id'=>$id,
         'nombre'=>$_POST['nombre'],
     ];
@@ -45,7 +45,7 @@ $marcas = getDataFromJSON('marcas');
         <div class="card">
             <div class="card-header">
                 <div class="w-auto" style="display: flex; flex-direction: row; align-items: center;">
-                    <a class="btn btn-primary" href="categorias.php"> <i class="fas fa-arrow-left"></i> </a>
+                    <a class="btn btn-primary" href="marcas.php"> <i class="fas fa-arrow-left"></i> </a>
                     <div class="text-primary" style="margin-left: 20px;">
                        Añadir Marcas
                     </div>

@@ -19,7 +19,7 @@ if(!empty($_GET['del'])){
         <div class="card shadow mb-4">
             <div class="card-header py-3" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
                 <h6 class="m-0 font-weight-bold text-primary">marcas</h6>
-                <a class="btn btn-primary" href="categoria_add.php">+</a>
+                <a class="btn btn-primary" href="marca_add.php">+</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -32,15 +32,15 @@ if(!empty($_GET['del'])){
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($marcas as $categoria): ?>
+                        <?php foreach($marcas as $marca): ?>
                         <tr>
-                            <td><?php echo $categoria['id'] ?></td>
-                            <td><?php echo $categoria['nombre'] ?></td>
+                            <td><?php echo $marca['id'] ?></td>
+                            <td><?php echo $marca['nombre'] ?></td>
                             <td style="display: flex; justify-content: space-around; width: 115px;">
                                <!-- boton de editar -->
-                                <a class="btn btn-info" href="categoria_add.php?id=<?php echo $categoria['id'] ?>"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-info" href="marca_add.php?id=<?php echo $marca['id'] ?>"><i class="fas fa-edit"></i></a>
                                 <!-- boton de borrar -->
-                                <a class="btn btn-danger" href="marcas.php?del=<?php echo $categoria['id'] ?>"><i class="fas fa-trash-alt"></i></a>
+                                <a class="btn btn-danger" href="marcas.php?del=<?php echo $marca['id'] ?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
