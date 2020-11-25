@@ -69,6 +69,14 @@
                 <span>Categorias</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="marcas.php">
+                <i class="fas fa-fw fa-send"></i>
+                <span>Marcas</span></a>
+        </li>
+
+        
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
