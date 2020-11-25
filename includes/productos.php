@@ -75,7 +75,7 @@ $marcas = getDataFromJSON('marcas');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php"><?php echo $producto['nombre'] ?></a></h3>
+                                        <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
                                         <span>$ <?php echo $producto['precio'] ?></span>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@ $marcas = getDataFromJSON('marcas');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php"><?php echo $producto['nombre'] ?></a></h3>
+                                        <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
                                         <span>$ <?php echo $producto['precio'] ?></span>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ $marcas = getDataFromJSON('marcas');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php"><?php echo $producto['nombre'] ?></a></h3>
+                                        <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
                                         <span>$ <?php echo $producto['precio'] ?></span>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@ $marcas = getDataFromJSON('marcas');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php"><?php echo $producto['nombre'] ?></a></h3>
+                                        <h3><a href="product_details.php?id=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
                                         <span>$ <?php echo $producto['precio'] ?></span>
                                     </div>
                                 </div>
