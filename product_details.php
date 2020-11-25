@@ -3,6 +3,24 @@ include_once "helpers/dataHelper.php";
 
 $productos = getDataFromJSON('productos');
 
+$comentarios = getDataFromJSON('comentarios');
+
+if(isset($_POST['add'])){
+
+    $id = date('Ymdhis');
+
+    $comentarios[$id] = [
+        'id'=>date('Ymdhis'),
+        'id_producto'=>$_GET['id'],
+        'nombre'=>$_POST['nombre'],
+        'comentario'=>$_POST['comentario'],
+        'fecha'=>date('d/m/Y H:s')
+    ];
+
+    setDataJSON('comentarios', $comentarios);
+}
+
+
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -58,7 +76,48 @@ $productos = getDataFromJSON('productos');
                 </div>
             </div>
         </div>
+
+        <div class="container">
+            <h3>Añadir un comentario</h3>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" name="nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Comentarios</label>
+                    <textarea class="form-control" name="comentario" rows="6" ></textarea>
+                </div>
+
+                <button type="submit" name="add" class="btn btn-primary" style="float: right">Enviar</button>
+                <br><br>
+            </form>
+            <br>
+            <br>
+            <h3>Comentarios</h3>
+            <?php
+
+            rsort($comentarios);
+
+            ?>
+            <?php $i = 0; foreach ($comentarios as $comentario): ?>
+                <?php if($comentario['id_producto'] == $_GET['id']): ?>
+                    <?php $i++; ?>
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="name"><?php echo $comentario['nombre'] ?> ha comentado:</div>
+                            <div class="fecha"><?php echo $comentario['fecha'] ?></div>
+                        </div>
+                        <div class="card-body"><?php echo $comentario['comentario'] ?></div>
+                    </div>
+                    <br>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php echo $i == 0 ? "Este producto no contiene comentarios" : ""  ?>
         </div>
+
     </main>
 
     <?php include('includes/footer.php') ?>
