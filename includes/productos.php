@@ -1,19 +1,10 @@
 <?php 
+include_once "./helpers/dataHelper.php";
 
-$categorias = [
-    ['id'=> 1, 'nombre' => 'Malla de cuero'],
-    ['id'=> 2, 'nombre' => 'Malla de metal'],
-    ['id'=> 3, 'nombre' => 'Malla de goma']
-];
 
-$productos = [
-    ['id'=> 1, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'popular1.png', 'categoria'=>2],
-    ['id'=> 2, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '60000000', 'imagen' => 'popular2.png', 'categoria'=>1],
-    ['id'=> 3, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'popular3.png', 'categoria'=>1],
-    ['id'=> 4, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'popular4.png', 'categoria'=>2],
-    ['id'=> 5, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '60000000', 'imagen' => 'popular5.png', 'categoria'=>3],
-    ['id'=> 6, 'nombre' => 'Thermo Ball Etip Gloves', 'precio' => '45.600', 'imagen' => 'popular6.png', 'categoria'=>1]
-];
+$categorias = getDataFromJSON("../db/categorias.json");
+$productos = getDataFromJSON("../db/productos.json");
+
 
 ?>
         

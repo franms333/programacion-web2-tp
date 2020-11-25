@@ -1,7 +1,7 @@
 <?php
 
 function getDataFromJSON($nombre){
-    $data = file_get_contents("../db/$nombre.json");
+    $data = file_get_contents($nombre); 
     return json_decode($data,true);
 }
 
