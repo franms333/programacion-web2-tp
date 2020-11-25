@@ -43,6 +43,7 @@ if(isset($_POST['add'])){
         'precio'=>$_POST['precio'],
         'stock'=>$_POST['stock'],
         'id_categoria'=>$_POST['categoria'],
+        'id_marca'=>$_POST['marca'],
         'imagen'=>$archivo
     ];
 
@@ -58,7 +59,12 @@ if(!empty($_GET['id'])){
     $producto = $productos[$_GET['id']];
 }
 
+
+// Array de categorias
 $categorias = getDataFromJSON('categorias');
+
+// Array de marcas
+$marcas = getDataFromJSON('marcas');
 
 ?>
     <div class="container-fluid">
@@ -91,6 +97,17 @@ $categorias = getDataFromJSON('categorias');
                             <option value="<?php echo $categoria['id'] ?>" <?php echo !empty($producto['id_categoria']) ?  $categoria['id'] == $producto['id_categoria'] ?  "selected" : '' : '' ?> >
                                 <?php echo $categoria['nombre']  ?>
                             </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Marca</label>
+                        <select name="marca" id="marca" class="form-control">
+                            <?php foreach($marcas as $marca): ?>
+                                <option value="<?php echo $marca['id'] ?>" <?php echo !empty($producto['id_marca']) ?  $marca['id'] == $producto['id_marca'] ?  "selected" : '' : '' ?> >
+                                    <?php echo $marca['nombre']  ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
