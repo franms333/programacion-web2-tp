@@ -57,7 +57,7 @@ if(!empty($_GET['del'])){
                                     <?php endif; ?>
                                 </div>
                             </td>
-                            <td style="display: flex; justify-content: space-around; width: 115px;">
+                            <td style="width: 115px;">
                                 <a class="btn btn-info" href="producto_add.php?id=<?php echo $producto['id'] ?>"><i class="fas fa-edit"></i></a>
                                 <a class="btn btn-danger" href="productos.php?del=<?php echo $producto['id'] ?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
