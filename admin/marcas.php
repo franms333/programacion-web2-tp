@@ -18,7 +18,7 @@ if(!empty($_GET['del'])){
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                <h6 class="m-0 font-weight-bold text-primary">marcas</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Marcas</h6>
                 <a class="btn btn-primary" href="marca_add.php">+</a>
             </div>
             <div class="card-body">

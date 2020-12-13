@@ -75,6 +75,12 @@
                 <span>Marcas</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="comentarios.php">
+                <i class="fas fa-fw fa-file"></i>
+                <span>Comentarios</span></a>
+        </li>
+
         
 
         <!-- Divider -->
