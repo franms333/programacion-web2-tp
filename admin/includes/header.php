@@ -71,13 +71,13 @@
 
         <li class="nav-item">
             <a class="nav-link" href="marcas.php">
-                <i class="fas fa-fw fa-file"></i>
+                <i class="fas fa-fw fa-address-card"></i>
                 <span>Marcas</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="comentarios.php">
-                <i class="fas fa-fw fa-file"></i>
+                <i class="fas fa-fw fa-comment"></i>
                 <span>Comentarios</span></a>
         </li>
 
