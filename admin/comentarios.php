@@ -32,7 +32,7 @@ if(!empty($_GET['del'])){
                         <?php endforeach; ?>
                     </select>
                     <button type="submit" class = "btn btn-primary">
-                        Ver
+                        Buscar
                     </button>
                 </form>
             </div>

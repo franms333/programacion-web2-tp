@@ -22,6 +22,8 @@
     <list default="true" id="205f7d69-2251-452e-ac43-525427e9c9e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/comentarios.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/comentarios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/comentarios.json" beforeDir="false" afterPath="$PROJECT_DIR$/db/comentarios.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +75,7 @@
       <workItem from="1606319376068" duration="2808000" />
       <workItem from="1606342639198" duration="1463000" />
       <workItem from="1607816497459" duration="2704000" />
-      <workItem from="1607957582806" duration="2460000" />
+      <workItem from="1607957582806" duration="2776000" />
     </task>
     <servers />
   </component>
