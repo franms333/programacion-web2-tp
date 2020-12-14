@@ -5,7 +5,7 @@
 
     if($name == "admin" && $password == "admin" || $name == "facundo" && $password == "123456"){
         echo "Accedio a la administracion";
-        header("Location: admin/index.php");
+        header("Location: admin/dashboard.php");
     }else{
         /* echo "Error usuario o contraseña no valida"; */
         header("Location: login.php?error=true#login");
