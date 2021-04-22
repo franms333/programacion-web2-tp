@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="row" style="display: flex; align-items:baseline">
                 
 
                 <?php 
@@ -23,7 +23,7 @@
                     
                     
                 ?>
-                    <div class="single-popular-items mb-50 text-center col-md-3">
+                    <div class="single-popular-items mb-50 text-center col-md-3" >
                         <div class="popular-img">
                             <img src="imagenes/<?php echo $prod['imagen']?>" alt="iteracion de relojes">
                             <div class="img-cap">

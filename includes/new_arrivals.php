@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <?php foreach($new_arrivals as $new_arrival): ?>
+            <?php foreach($new_arrivals as $new_arrival){ ?>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <div class="single-new-pro mb-30 text-center">
                     <div class="product-img">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <?php endforeach;?>
+            <?php }?>
         </div>
     </div>
 </section>
