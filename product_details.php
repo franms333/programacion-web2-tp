@@ -56,14 +56,21 @@ if(isset($_POST['add'])){
         <div class="product_image_area">
             <div class="container">
                 <div class="row justify-content-center">
-                    <img src="imagenes/<?php echo $productos[$_GET['id']]['imagen'] ?>" alt="Gato">
+                    <?php foreach ($productos as $prod) {
+                       
+                    ?>
+                    <img src="imagenes/<?php echo $prod['imagen'] ?>" alt="Gato">
+                    <?php } ?>
                 </div>
                 <div class="col-lg-12">
                     <div class="single_product_text text-center">
-                        <h3><?php echo $productos[$_GET['id']]['nombre'] ?> </h3>
-                        <p><?php echo $productos[$_GET['id']]['descripcion'] ?>
+                        <?php foreach ($productos as $prod) {
+                           
+                         ?>
+                        <h3><?php echo $prod['nombre'] ?> </h3>
+                        <p><?php echo $prod['descripcion'] ?>
                         </p>
-
+                        <?php } ?>
                         <div class="card_area">
                             <div class="product_count_area">
                                 <?php echo "$" . number_format($productos[$_GET['id']]['precio'], 2, ',', '.') ?>
