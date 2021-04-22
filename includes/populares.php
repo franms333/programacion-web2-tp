@@ -6,38 +6,44 @@
             <div class="col-xl-7 col-lg-8 col-md-10">
                 <div class="section-tittle mb-70 text-center">
                     <h2>Clasicos</h2>
-                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
+                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Quis ipsum suspendisse ultrices gravida.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-            <?php 
-                //include_once('datos/productos.php');
+        <div class="container">
+            <div class="row">
+                
+
+                <?php 
+                
                 $datos=file_get_contents('db/productos.json');
                 $datos_json=json_decode($datos,true);
                 foreach($datos_json as $prod){
                     
                     
-                ?>       
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="imagenes/<?php echo $prod['imagen']?>" alt="iteracion de relojes">
-                        <div class="img-cap">
-                            <span>Añadir al carrito</span>
+                ?>
+                    <div class="single-popular-items mb-50 text-center col-md-3">
+                        <div class="popular-img">
+                            <img src="imagenes/<?php echo $prod['imagen']?>" alt="iteracion de relojes">
+                            <div class="img-cap">
+                                <span>Añadir al carrito</span>
+                            </div>
+                            <div class="favorit-items">
+                                <span class="flaticon-heart"></span>
+                            </div>
                         </div>
-                        <div class="favorit-items">
-                            <span class="flaticon-heart"></span>
+                        <div class="popular-caption">
+                            <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>">Thermo Ball Etip
+                                    Gloves</a></h3>
+                            <span>$ <?php echo $prod['precio'] ?></span>
                         </div>
                     </div>
-                    <div class="popular-caption">
-                        <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>">Thermo Ball Etip Gloves</a></h3>
-                        <span>$ <?php echo $prod['precio'] ?></span>
-                    </div>
-                </div>
                 <?php } ?>
+
+                
+
             </div>
-            
         </div>
         <!-- Button -->
         <div class="row justify-content-center">
