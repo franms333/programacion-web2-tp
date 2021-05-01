@@ -1,3 +1,11 @@
+<?php
+
+use function PHPSTORM_META\map;
+
+include('config/db.php');
+?> 
+    <?php include('helpers/connection.php')?>
+
 <!--? Popular Items Start -->
 <div class="popular-items section-padding30">
     <div class="container">
@@ -19,9 +27,14 @@
                 
                 $datos=file_get_contents('db/productos.json');
                 $datos_json=json_decode($datos,true);
+
                 foreach($datos_json as $prod){
-                    
-                    
+                
+                    // $sql = "INSERT INTO products(product_id, category_id, brand_id, name, description, price, stock, image) VALUES 
+                    // (".$prod['id'].",".$prod['id_categoria'].",".$prod['id_marca'].",'".$prod['nombre']."','".$prod['descripcion']."','".$prod['precio']."','".$prod['stock']."','".$prod['imagen']."')";
+                    $sql = "SELECT * FROM products";
+                    // var_dump($sql);
+                    $con->query($sql);
                 ?>
                     <div class="single-popular-items mb-50 text-center col-md-3" >
                         <div class="popular-img">
@@ -34,14 +47,11 @@
                             </div>
                         </div>
                         <div class="popular-caption">
-                            <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>">Thermo Ball Etip
-                                    Gloves</a></h3>
+                            <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>"><?php echo $prod['nombre']?></a></h3>
                             <span>$ <?php echo $prod['precio'] ?></span>
                         </div>
                     </div>
                 <?php } ?>
-
-                
 
             </div>
         </div>
