@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\map;
-
 include('config/db.php');
 ?> 
     <?php include('helpers/connection.php')?>
@@ -33,7 +31,6 @@ include('config/db.php');
                     // $sql = "INSERT INTO products(product_id, category_id, brand_id, name, description, price, stock, image) VALUES 
                     // (".$prod['id'].",".$prod['id_categoria'].",".$prod['id_marca'].",'".$prod['nombre']."','".$prod['descripcion']."','".$prod['precio']."','".$prod['stock']."','".$prod['imagen']."')";
                     $sql = "SELECT * FROM products";
-                    // var_dump($sql);
                     $con->query($sql);
                 ?>
                     <div class="single-popular-items mb-50 text-center col-md-3" >
