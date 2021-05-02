@@ -61,39 +61,98 @@ include('config/db.php');
         <div class="tab-content" id="nav-tabContent">
             <!-- card one -->
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="row" style="display: flex; align-items:baseline">
-                
+                <div class="row">
 
-                <?php 
-                
-                $datos=file_get_contents('db/productos.json');
-                $datos_json=json_decode($datos,true);
+                    <?php foreach($productos as $producto){?>
 
-                foreach($datos_json as $prod){
-                
-                    // $sql = "INSERT INTO products(product_id, category_id, brand_id, name, description, price, stock, image) VALUES 
-                    // (".$prod['id'].",".$prod['id_categoria'].",".$prod['id_marca'].",'".$prod['nombre']."','".$prod['descripcion']."','".$prod['precio']."','".$prod['stock']."','".$prod['imagen']."')";
-                    $sql = "SELECT * FROM products";
-                    $con->query($sql);
-                ?>
-                    <div class="single-popular-items mb-50 text-center col-md-3" >
-                        <div class="popular-img">
-                            <img src="imagenes/<?php echo $prod['imagen']?>" alt="iteracion de relojes">
-                            <div class="img-cap">
-                                <span>Añadir al carrito</span>
+                        <?php if(
+                                ( isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria'] ) &&
+                                ( isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca'] )
+                            ):
+                        ?>
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
+                                    <div class="popular-img">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <div class="img-cap">
+                                            <span>Añadir al carrito</span>
+                                        </div>
+                                        <div class="favorit-items">
+                                            <span class="flaticon-heart"></span>
+                                        </div>
+                                    </div>
+                                    <div class="popular-caption">
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="favorit-items">
-                                <span class="flaticon-heart"></span>
-                            </div>
-                        </div>
-                        <div class="popular-caption">
-                            <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>"><?php echo $prod['nombre']?></a></h3>
-                            <span>$ <?php echo $prod['precio'] ?></span>
-                        </div>
-                    </div>
-                <?php } ?>
 
-            </div>
+                        <?php elseif( (isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria']) && !isset($_GET['marca'])    ): ?>
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
+                                    <div class="popular-img">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <div class="img-cap">
+                                            <span>Añadir al carrito</span>
+                                        </div>
+                                        <div class="favorit-items">
+                                            <span class="flaticon-heart"></span>
+                                        </div>
+                                    </div>
+                                    <div class="popular-caption">
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php elseif( (isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca']) && !isset($_GET['categoria'])   ): ?>
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
+                                    <div class="popular-img">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <div class="img-cap">
+                                            <span>Añadir al carrito</span>
+                                        </div>
+                                        <div class="favorit-items">
+                                            <span class="flaticon-heart"></span>
+                                        </div>
+                                    </div>
+                                    <div class="popular-caption">
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php elseif( !isset($_GET['marca']) && !isset($_GET['categoria'])): ?>
+
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
+                                    <div class="popular-img">
+                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <div class="img-cap">
+                                            <span>Añadir al carrito</span>
+                                        </div>
+                                        <div class="favorit-items">
+                                            <span class="flaticon-heart"></span>
+                                        </div>
+                                    </div>
+                                    <div class="popular-caption">
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+
+                    <?php } ?>
+                </div>
             </div>
         </div>
         <!-- End Nav Card -->
