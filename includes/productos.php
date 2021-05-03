@@ -1,12 +1,20 @@
 <?php
 
 include_once "helpers/dataHelper.php";
+require __DIR__."/../helpers/connection.php";
 
-$categorias = getDataFromJSON('categorias');
+$sqlCategories = "SELECT * FROM categories WHERE deleted_at IS NULL";
 
-$productos = getDataFromJSON('productos');
+$sqlBrands = "SELECT * FROM brands WHERE deleted_at IS NULL";
 
-$marcas = getDataFromJSON('marcas');
+$sqlproducts = "SELECT * FROM products WHERE deleted_at IS NULL";
+
+$categories = $con->query($sqlCategories);
+
+$brands = $con->query($sqlBrands);
+
+$products = $con->query($sqlproducts);
+
 
 ?>
 
@@ -29,11 +37,11 @@ include('config/db.php');
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link <?php if(empty($_GET['categoria'])) echo "active"; ?>"  href="shop.php?#productos">Todos</a>
 
-                            <?php foreach($categorias as $categoria): ?>
-                                <a class="nav-item nav-link <?php if(!empty($_GET['categoria']) && $_GET['categoria'] == $categoria['id']) echo "active"; ?>"
-                                   href="shop.php?categoria=<?php echo $categoria['id'] ?><?php echo !empty($_GET['marca']) ? "&marca=".$_GET['marca'] : '' ?>#productos"
+                            <?php foreach($categories as $categoria): ?>
+                                <a class="nav-item nav-link <?php if(!empty($_GET['categoria']) && $_GET['categoria'] == $categoria['category_id']) echo "active"; ?>"
+                                   href="shop.php?categoria=<?php echo $categoria['category_id'] ?><?php echo !empty($_GET['marca']) ? "&marca=".$_GET['marca'] : '' ?>#productos"
                                 >
-                                    <?php echo $categoria['nombre'] ?>
+                                    <?php echo $categoria['name'] ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>
@@ -43,11 +51,11 @@ include('config/db.php');
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link <?php if(empty($_GET['marca'])) echo "active"; ?>"  href="shop.php?#productos">Todos</a>
 
-                            <?php foreach($marcas as $marca): ?>
-                                <a class="nav-item nav-link <?php if(!empty($_GET['marca']) && $_GET['marca'] == $marca['id']) echo "active"; ?>"
-                                   href="shop.php?<?php echo !empty($_GET['categoria']) ? 'categoria='.$_GET['categoria'].'&' : '' ?>marca=<?php echo $marca['id'] ?>#productos"
+                            <?php foreach($brands as $marca): ?>
+                                <a class="nav-item nav-link <?php if(!empty($_GET['marca']) && $_GET['marca'] == $marca['brand_id']) echo "active"; ?>"
+                                   href="shop.php?<?php echo !empty($_GET['categoria']) ? 'categoria='.$_GET['categoria'].'&' : '' ?>marca=<?php echo $marca['brand_id'] ?>#productos"
                                 >
-                                    <?php echo $marca['nombre'] ?>
+                                    <?php echo $marca['name'] ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>
@@ -63,18 +71,18 @@ include('config/db.php');
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
 
-                    <?php foreach($productos as $producto){?>
+                    <?php foreach($products as $producto){?>
 
                         <?php if(
-                                ( isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria'] ) &&
-                                ( isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca'] )
+                                ( isset($_GET['categoria']) && $producto['category_id'] == $_GET['categoria'] ) &&
+                                ( isset($_GET['marca']) && $producto['brand_id'] == $_GET['marca'] )
                             ):
                         ?>
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <img src="imagenes/<?php echo $producto['image'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -83,18 +91,18 @@ include('config/db.php');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['product_id']?>"><?php echo $producto['name'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['price'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
 
-                        <?php elseif( (isset($_GET['categoria']) && $producto['id_categoria'] == $_GET['categoria']) && !isset($_GET['marca'])    ): ?>
+                        <?php elseif( (isset($_GET['categoria']) && $producto['category_id'] == $_GET['categoria']) && !isset($_GET['marca'])    ): ?>
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <img src="imagenes/<?php echo $producto['image'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -103,18 +111,18 @@ include('config/db.php');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['product_id']?>"><?php echo $producto['name'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['price'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
 
-                        <?php elseif( (isset($_GET['marca']) && $producto['id_marca'] == $_GET['marca']) && !isset($_GET['categoria'])   ): ?>
+                        <?php elseif( (isset($_GET['marca']) && $producto['brand_id'] == $_GET['marca']) && !isset($_GET['categoria'])   ): ?>
 
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <img src="imagenes/<?php echo $producto['image'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -123,8 +131,8 @@ include('config/db.php');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['product_id']?>"><?php echo $producto['name'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['price'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +142,7 @@ include('config/db.php');
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="imagenes/<?php echo $producto['imagen'] ?>" alt="" style="width: 120px !important;">
+                                        <img src="imagenes/<?php echo $producto['image'] ?>" alt="" style="width: 120px !important;">
                                         <div class="img-cap">
                                             <span>Añadir al carrito</span>
                                         </div>
@@ -143,13 +151,12 @@ include('config/db.php');
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="product_details.php?prodId=<?php echo $producto['id']?>"><?php echo $producto['nombre'] ?></a></h3>
-                                        <span>$ <?php echo number_format($producto['precio'], 2, ",", ".")  ?></span>
+                                        <h3><a href="product_details.php?prodId=<?php echo $producto['product_id']?>"><?php echo $producto['name'] ?></a></h3>
+                                        <span>$ <?php echo number_format($producto['price'], 2, ",", ".")  ?></span>
                                     </div>
                                 </div>
                             </div>
                         <?php endif; ?>
-
 
                     <?php } ?>
                 </div>

@@ -7,7 +7,7 @@ include "../helpers/functions.php";
 require __DIR__."/../helpers/connection.php";
 
 // Array asociativo del JSON de productos
-$productos = getDataFromJSON('productos');
+// $productos = getDataFromJSON('productos');
 
 $sqlCategories = "SELECT * FROM categories WHERE deleted_at IS NULL";
 
@@ -26,7 +26,8 @@ if(isset($_POST['add'])){
     $marca = $_POST['marca'];
     $precio = $_POST['precio'];
     $stock = $_POST['stock'];
-    $imagen = $_POST['archivo'];
+    $imagen = $_FILES['archivo']['name'];
+    echo $imagen;
     
 
     if(!empty($_GET['id'])){
@@ -57,7 +58,6 @@ if(isset($_POST['add'])){
         else
             move_uploaded_file($temp, '../imagenes/'.$archivo);
     }
-
     redirect('productos.php');
 }
 
@@ -68,13 +68,11 @@ if(!empty($_GET['id'])){
     $producto = $productos[$_GET['id']];
 }
 
-
 // Array de categorias
 $categorias = getDataFromJSON('categorias');
 
 // Array de marcas
 $marcas = getDataFromJSON('marcas');
-
 ?>
     <div class="container-fluid">
         <div class="card">
@@ -85,7 +83,6 @@ $marcas = getDataFromJSON('marcas');
                         Añadir Producto
                     </div>
                 </div>
-
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
@@ -117,36 +114,29 @@ $marcas = getDataFromJSON('marcas');
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="exampleInputEmail1">Precio</label>
                         <input type="text" class="form-control" name="precio" value="<?php echo !empty($producto) ? $producto['precio'] : ''?>">
                     </div>
-
                     <div class="form-group">
                         <label for="exampleInputEmail1">Stock</label>
                         <input type="text" class="form-control" name="stock" value="<?php echo !empty($producto['stock']) ? $producto['stock'] : ''?>">
                     </div>
-
                     <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
                         <div  style="display: flex; flex-direction: column;">
                             <label for="archivo">Subir Imagen</label>
                             <input name="archivo" type="file">
                         </div>
-
                         <div>
                             <?php if( !empty($producto['imagen']) ): ?>
                                 <img src="../imagenes/<?php echo $producto['imagen'] ?>" width="150">
                             <?php endif; ?>
                         </div>
-
                     </div>
-
                     <button type="submit" name="add" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
         </div>
-
     </div>
 
 <?php include 'includes/footer.php'; ?>

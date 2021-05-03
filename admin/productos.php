@@ -11,13 +11,17 @@ require __DIR__."/../helpers/connection.php";
 
 // // Array asociativo del JSON de categorias
 // $categorias = getDataFromJSON('categorias');
+$sqlProducts = "SELECT P.*, C.name as category FROM products P
+INNER JOIN categories C on P.category_id = C.category_id WHERE P.deleted_at is NULL";
 
-
+$products = $con->query($sqlProducts);
 
 if(!empty($_GET['del'])){
-    unset($productos[$_GET['del']]);
-    setDataJSON('productos', $productos);
-    //redirect('productos.php');
+    $sql = "UPDATE products SET deleted_at = NOW() WHERE product_id = ".$_GET['del'];
+    $con->query($sql);
+    // unset($productos[$_GET['del']]);
+    // setDataJSON('productos', $productos);
+    redirect('productos.php');
 }
 
 ?>
@@ -45,24 +49,25 @@ if(!empty($_GET['del'])){
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($productos as $producto): ?>
+                        <?php foreach($products as $producto): ?>
+                        
                         <tr>
-                            <td><?php echo $producto['id'] ?></td>
-                            <td><?php echo $producto['nombre'] ?></td>
-                            <td><?php echo $producto['descripcion'] ?></td>
-                            <td><?php echo "$".number_format($producto['precio'], 2, ',', '.') ?></td>
+                            <td><?php echo $producto['product_id'] ?></td>
+                            <td><?php echo $producto['name'] ?></td>
+                            <td><?php echo $producto['description'] ?></td>
+                            <td><?php echo "$".number_format($producto['price'], 2, ',', '.') ?></td>
                             <td><?php echo $producto['stock'] ?></td>
-                            <td><?php echo $categorias[$producto['id_categoria']]['nombre'] ?></td>
+                            <td><?php echo $producto['category']?></td>
                             <td style="padding:3px;">
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                                    <?php if(!empty($producto['imagen'])): ?>
-                                        <img src="../imagenes/<?php echo $producto['imagen'] ?>" width="70" ">
+                                    <?php if(!empty($producto['image'])): ?>
+                                        <img src="../imagenes/<?php echo $producto['image'] ?>" width="70">
                                     <?php endif; ?>
                                 </div>
                             </td>
                             <td style="width: 115px;">
-                                <a class="btn btn-info" href="producto_add.php?id=<?php echo $producto['id'] ?>"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-danger" href="productos.php?del=<?php echo $producto['id'] ?>"><i class="fas fa-trash-alt"></i></a>
+                                <a class="btn btn-info" href="producto_add.php?id=<?php echo $producto['product_id'] ?>"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-danger" href="productos.php?del=<?php echo $producto['product_id'] ?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

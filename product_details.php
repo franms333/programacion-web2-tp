@@ -1,24 +1,33 @@
 <?php
 include_once "helpers/dataHelper.php";
+require __DIR__."../helpers/connection.php";
 
-$productos = getDataFromJSON('productos');
+// $productos = getDataFromJSON('productos');
+$productoActual = $_GET['prodId'];
+
+$sqlproducts = "SELECT * FROM products WHERE deleted_at IS NULL and product_id = ".$productoActual;
+
+$products = $con->query($sqlproducts);
+
+foreach($products as $product) {
+    $product[] = $product;
+}
 
 $sql = "SELECT * FROM comments";
 $comentarios = $con->query($sql);
 
 if(isset($_POST['add'])){
 
-    $id = date('Ymdhis');
+        $id_producto=$_GET['prodId'];
+        $nombre=$_POST['nombre'];
+        $comentario=$_POST['comentario'];
+        
 
-    $comentarios[$id] = [
-        'id'=>date('Ymdhis'),
-        'id_producto'=>$_GET['id'],
-        'nombre'=>$_POST['nombre'],
-        'comentario'=>$_POST['comentario'],
-        'fecha'=>date('d/m/Y H:s')
-    ];
+        $sql = "INSERT INTO comments (product_id, user, description, created_at) 
+        VALUES ('$id_producto', '$nombre', '$comentario', NOW())";        
+        $con->query($sql);
 
-    setDataJSON('comentarios', $comentarios);
+    // setDataJSON('comentarios', $comentarios);
 }
 
 
@@ -58,17 +67,16 @@ if(isset($_POST['add'])){
             <div class="container">
                 <div class="row justify-content-center">
                     
-                    <img src="imagenes/<?php echo $productos[$_GET['prodId']]['imagen'] ?>" alt="Gato">
+                    <img src="imagenes/<?php echo $product['image'] ?>" alt="Gato">
                 </div>
                 <div class="col-lg-12">
                     <div class="single_product_text text-center">
-                        <h3><?php echo $productos[$_GET['prodId']]['nombre'] ?> </h3>
-                        <p><?php echo $productos[$_GET['prodId']]['descripcion'] ?>
+                        <h3><?php echo $product['name'] ?> </h3>
+                        <p><?php echo $product['description'] ?>
                         </p>
-
                         <div class="card_area">
                             <div class="product_count_area">
-                                <?php echo "$" . number_format($productos[$_GET['prodId']]['precio'], 2, ',', '.') ?>
+                                <?php echo "$" . number_format($product['price'], 2, ',', '.') ?>
                             </div>
                             <div class="add_to_cart">
                                 <a href="#" class="btn_3">Añadir al carrito</a>
@@ -100,18 +108,18 @@ if(isset($_POST['add'])){
             <h3>Comentarios</h3>
             <?php
 
-            rsort($comentarios);
+            // rsort($comentarios);
 
             ?>
             <?php $i = 0; foreach ($comentarios as $comentario): ?>
-                <?php if($comentario['id_producto'] == $_GET['prodId']): ?>
+                <?php if($comentario['product_id'] == $_GET['prodId']): ?>
                     <?php $i++; ?>
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <div class="name"><?php echo $comentario['nombre'] ?> ha comentado:</div>
-                            <div class="fecha"><?php echo $comentario['fecha'] ?></div>
+                            <div class="name"><?php echo $comentario['user'] ?> ha comentado:</div>
+                            <div class="fecha"><?php echo $comentario['created_at'] ?></div>
                         </div>
-                        <div class="card-body"><?php echo $comentario['comentario'] ?></div>
+                        <div class="card-body"><?php echo $comentario['description'] ?></div>
                     </div>
                     <br>
                 <?php endif; ?>
