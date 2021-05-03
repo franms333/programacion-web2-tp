@@ -23,19 +23,19 @@ include('config/db.php');
 
                 <?php 
                 
-                $datos=file_get_contents('db/productos.json');
-                $datos_json=json_decode($datos,true);
+                // $datos=file_get_contents('db/productos.json');
+                // $datos_json=json_decode($datos,true);
 
-                foreach($datos_json as $prod){
+                $sqlproducts = "SELECT * FROM products WHERE deleted_at IS NULL";
+
+                $products = $con->query($sqlproducts);
+
+                foreach($products as $prod){
                 
-                    // $sql = "INSERT INTO products(product_id, category_id, brand_id, name, description, price, stock, image) VALUES 
-                    // (".$prod['id'].",".$prod['id_categoria'].",".$prod['id_marca'].",'".$prod['nombre']."','".$prod['descripcion']."','".$prod['precio']."','".$prod['stock']."','".$prod['imagen']."')";
-                    $sql = "SELECT * FROM products";
-                    $con->query($sql);
                 ?>
                     <div class="single-popular-items mb-50 text-center col-md-3" >
                         <div class="popular-img">
-                            <img src="imagenes/<?php echo $prod['imagen']?>" alt="iteracion de relojes">
+                            <img src="imagenes/<?php echo $prod['image']?>" alt="iteracion de relojes">
                             <div class="img-cap">
                                 <span>Añadir al carrito</span>
                             </div>
@@ -44,8 +44,8 @@ include('config/db.php');
                             </div>
                         </div>
                         <div class="popular-caption">
-                            <h3><a href="product_details.php?prodId=<?php echo $prod['id']?>"><?php echo $prod['nombre']?></a></h3>
-                            <span>$ <?php echo $prod['precio'] ?></span>
+                            <h3><a href="product_details.php?prodId=<?php echo $prod['product_id']?>"><?php echo $prod['name']?></a></h3>
+                            <span>$ <?php echo $prod['price'] ?></span>
                         </div>
                     </div>
                 <?php } ?>
