@@ -3,7 +3,8 @@ include_once "helpers/dataHelper.php";
 
 $productos = getDataFromJSON('productos');
 
-$comentarios = getDataFromJSON('comentarios');
+$sql = "SELECT * FROM comments";
+$comentarios = $con->query($sql);
 
 if(isset($_POST['add'])){
 
