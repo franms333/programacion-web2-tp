@@ -19,19 +19,12 @@ include('config/db.php');
         </div>
         <div class="container">
             <div class="row" style="display: flex; align-items:baseline">
-                
-
                 <?php 
-                
                 // $datos=file_get_contents('db/productos.json');
                 // $datos_json=json_decode($datos,true);
-
                 $sqlproducts = "SELECT * FROM products WHERE deleted_at IS NULL";
-
                 $products = $con->query($sqlproducts);
-
                 foreach($products as $prod){
-                
                 ?>
                     <div class="single-popular-items mb-50 text-center col-md-3" >
                         <div class="popular-img">
@@ -49,7 +42,6 @@ include('config/db.php');
                         </div>
                     </div>
                 <?php } ?>
-
             </div>
         </div>
         <!-- Button -->

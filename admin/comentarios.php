@@ -9,7 +9,8 @@ include "../helpers/functions.php";
 // $productos = getDataFromJSON('productos');
 require __DIR__."/../helpers/connection.php";
 // Array asociativo del JSON de marcas
-$sql = "SELECT * FROM comments";
+$sql = "SELECT C.*, P.name as product_name FROM comments C
+INNER JOIN products P on P.product_id = C.product_id WHERE P.deleted_at is NULL";
 
 $comments = $con->query($sql);
 
@@ -60,8 +61,8 @@ if(!empty($_GET['del'])){
                                     <?php if( (isset($_GET['id_producto']) && ($comentario['id_producto'] == $_GET['id_producto'] || $_GET['id_producto'] == 0)) || !isset($_GET['id_producto']) ):  ?>
                                         <tr>
                                             <td><?php echo $comentario['comment_id'] ?></td>
-                                            <td><?php echo $comentario['user_id'] ?></td>
-                                            <td><?php echo $productos[$comentario['product_id']]['user_id'] ?></td>
+                                            <td><?php echo $comentario['user'] ?></td>
+                                            <td><?php echo $comentario['product_name']?></td>
                                             <td><?php echo $comentario['description'] ?></td>
                                             <td><a class="btn btn-danger" href="comentarios.php?del=<?php echo $comentario['comment_id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
                                         </tr>
