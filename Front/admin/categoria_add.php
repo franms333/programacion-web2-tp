@@ -4,50 +4,49 @@ include "includes/header.php";
 include "../helpers/dataHelper.php";
 include "../helpers/functions.php";
 
-// Array asociativo del JSON de marcas
-$marcas = getDataFromJSON('marcas');
+require __DIR__."/../helpers/connection.php";
+
 
 // POST
 if(isset($_POST['add'])){
+
+    $name = $_POST['nombre'];
+
     if(!empty($_GET['id'])){
-        // Id del marca
-        $id = $_GET['id'];
-        // Informacion del marca
-        $marca = $marcas[$id];
+
+        $sql = "UPDATE categories SET name = '$name' WHERE category_id = ".$_GET['id'];
+        $con->query($sql);
     }
     else
     {
-        // Generar nuevo Id de marcas
-        $id = date('Ymdhis');
+        $sql = "INSERT INTO categories(name) VALUES ('$name')";        
+        $con->query($sql);
     }
 
-    $marcas[$id] = [
-        'id'=>$id,
-        'nombre'=>$_POST['nombre'],
-    ];
 
-    setDataJSON('marcas', $marcas);
 
-    redirect('marcas.php');
+    redirect('categorias.php');
 }
 
 if(!empty($_GET['id'])){
-    // Array asociativo del JSON de marcas
-    $marcas = getDataFromJSON('marcas');
-    // Informacion del marca del id enviado por GET
-    $marca = $marcas[$_GET['id']];
+    $sql = "SELECT * FROM categories WHERE category_id = ".$_GET['id'];
+   
+    $categoria = $con->query($sql);
+    foreach($categoria as $row) {
+        $name = $row['name'];
+    }
 }
 
-$marcas = getDataFromJSON('marcas');
+$categorias = getDataFromJSON('categorias');
 
 ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
                 <div class="w-auto" style="display: flex; flex-direction: row; align-items: center;">
-                    <a class="btn btn-primary" href="marcas.php"> <i class="fas fa-arrow-left"></i> </a>
+                    <a class="btn btn-primary" href="categorias.php"> <i class="fas fa-arrow-left"></i> </a>
                     <div class="text-primary" style="margin-left: 20px;">
-                       Añadir Marcas
+                       Añadir Categoria
                     </div>
                 </div>
 
@@ -56,7 +55,7 @@ $marcas = getDataFromJSON('marcas');
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" value="<?php echo !empty($marca['nombre']) ? $marca['nombre'] : ''?>">
+                        <input type="text" class="form-control" name="nombre" value="<?php echo $name ?? '' ?>">
                     </div>
                     <button type="submit" name="add" class="btn btn-primary">Enviar</button>
                 </form>

@@ -4,50 +4,52 @@ include "includes/header.php";
 include "../helpers/dataHelper.php";
 include "../helpers/functions.php";
 
-// Array asociativo del JSON de categorias
-$categorias = getDataFromJSON('categorias');
+
+require __DIR__."/../helpers/connection.php";
+
+// Array asociativo del JSON de marcas
+// $marcas = getDataFromJSON('marcas');
 
 // POST
 if(isset($_POST['add'])){
+
+    $name = $_POST['nombre'];
+
     if(!empty($_GET['id'])){
-        // Id del categoria
-        $id = $_GET['id'];
-        // Informacion del categoria
-        $categoria = $categorias[$id];
+
+        $sql = "UPDATE brands SET name = '$name' WHERE brand_id = ".$_GET['id'];
+        $con->query($sql);
     }
     else
     {
-        // Generar nuevo Id de categoria
-        $id = date('Ymdhis');
+        $sql = "INSERT INTO brands(name) VALUES ('$name')";        
+        $con->query($sql);
     }
 
-    $categorias[$id] = [
-        'id'=>$id,
-        'nombre'=>$_POST['nombre'],
-    ];
+    // setDataJSON('marcas', $marcas);
 
-    setDataJSON('categorias', $categorias);
-
-    redirect('categorias.php');
+    redirect('marcas.php');
 }
 
 if(!empty($_GET['id'])){
-    // Array asociativo del JSON de categorias
-    $categorias = getDataFromJSON('categorias');
-    // Informacion del categoria del id enviado por GET
-    $categoria = $categorias[$_GET['id']];
+    $sql = "SELECT * FROM brands WHERE brand_id = ".$_GET['id'];
+   
+    $categoria = $con->query($sql);
+    foreach($categoria as $row) {
+        $name = $row['name'];
+    }
 }
 
-$categorias = getDataFromJSON('categorias');
+$marcas = getDataFromJSON('marcas');
 
 ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
                 <div class="w-auto" style="display: flex; flex-direction: row; align-items: center;">
-                    <a class="btn btn-primary" href="categorias.php"> <i class="fas fa-arrow-left"></i> </a>
+                    <a class="btn btn-primary" href="marcas.php"> <i class="fas fa-arrow-left"></i> </a>
                     <div class="text-primary" style="margin-left: 20px;">
-                       Añadir Categoria
+                       Añadir Marcas
                     </div>
                 </div>
 
@@ -56,7 +58,7 @@ $categorias = getDataFromJSON('categorias');
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" value="<?php echo !empty($categoria['nombre']) ? $categoria['nombre'] : ''?>">
+                        <input type="text" class="form-control" name="nombre" value="<?php echo $name ?? '' ?>">
                     </div>
                     <button type="submit" name="add" class="btn btn-primary">Enviar</button>
                 </form>
